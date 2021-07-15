@@ -25,18 +25,21 @@ const Template: ComponentStory<typeof EntryHorsesHorseName> = (props) => (
 
 export const Ja = Template.bind({});
 Ja.args = {
-  horseNumber: '1',
+  href: 'https://db.netkeiba.com/horse/2009102739',
+  horseNumber: 1,
   horseName: 'ゴールドシップ',
 };
 
 export const En = Template.bind({});
 En.args = {
-  horseNumber: '2',
+  href: 'https://db.netkeiba.com/horse/2009102739',
+  horseNumber: 2,
   horseName: 'Gold Ship',
 };
 
 export const Zh = Template.bind({});
 Zh.args = {
-  horseNumber: '3',
+  href: 'https://db.netkeiba.com/horse/2009102739',
+  horseNumber: 3,
   horseName: '黄金船',
 };

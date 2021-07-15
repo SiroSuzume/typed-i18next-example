@@ -1,8 +1,10 @@
-import { GridItem, GridItemProps, Text } from '@chakra-ui/react';
+import { GridItem, GridItemProps, Text, Link } from '@chakra-ui/react';
 
 export type EntryHorsesHorseNameProps = GridItemProps & {
+  /** パス */
+  href: string;
   /** 馬番 */
-  horseNumber: string;
+  horseNumber: number;
   /** 馬名 */
   horseName: string;
   /** 馬番Props */
@@ -12,6 +14,7 @@ export type EntryHorsesHorseNameProps = GridItemProps & {
 };
 
 export const EntryHorsesHorseName: React.FC<EntryHorsesHorseNameProps> = ({
+  href,
   horseNumber,
   horseName,
   horseNumberGridItemProps = {
@@ -28,7 +31,9 @@ export const EntryHorsesHorseName: React.FC<EntryHorsesHorseNameProps> = ({
       <Text>{horseNumber}</Text>
     </GridItem>
     <GridItem {...horseNameGridItemProps}>
-      <Text>{horseName}</Text>
+      <Link href={href} isExternal>
+        {horseName}
+      </Link>
     </GridItem>
   </>
 );

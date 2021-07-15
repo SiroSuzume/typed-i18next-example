@@ -1,2 +1,4 @@
 /** 使用可能なネームスペースの一覧 */
-export type NameSpace = 'seo' | 'common';
+export const nameSpaces = ['seo', 'common', 'horse-names'] as const;
+/** 使用可能なネームスペースの一覧型 */
+export type NameSpace = typeof nameSpaces[number];

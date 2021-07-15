@@ -21,11 +21,11 @@ export async function loadResourceLanguageByLocale(locale: string, nameSpaces: N
 
 /** 辞書オブジェクトを読み込む */
 export async function loadI18nextResource(
-  currentLocale: string,
+  currentLocales: string[],
   defaultLocale: string,
   nameSpaces: NameSpace[],
 ): Promise<Resource> {
-  const locales = Array.from(new Set([currentLocale, defaultLocale]));
+  const locales = Array.from(new Set([...currentLocales, defaultLocale]));
   const rawResources = await Promise.all<[string, ResourceLanguage]>(
     locales.map(async (locale) => [locale, await loadResourceLanguageByLocale(locale, nameSpaces)]),
   );

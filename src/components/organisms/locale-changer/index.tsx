@@ -2,6 +2,7 @@ import { defaultLocale, defaultOrigin } from '@/lib/env';
 import { buildLocalizedUrlFromLocale } from '@/lib/url';
 import { HStack, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 
 export type LocaleChangerProps = {
   /** サポートしているロケール一覧 */
@@ -13,9 +14,9 @@ export const LocaleChanger = ({ supportedLocales = [] }: LocaleChangerProps): JS
   return (
     <HStack>
       {supportedLocales.map((locale) => (
-        <Link key={`${locale}`} href={buildLocalizedUrlFromLocale(asPath, locale, defaultOrigin, defaultLocale)}>
-          {locale}
-        </Link>
+        <NextLink key={`${locale}`} locale={locale} href={asPath} passHref>
+          <Link href={buildLocalizedUrlFromLocale(asPath, locale, defaultOrigin, defaultLocale)}>{locale}</Link>
+        </NextLink>
       ))}
     </HStack>
   );

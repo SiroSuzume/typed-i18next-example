@@ -9,7 +9,7 @@ import { initializeI18n } from '@/lib/i18next/initializer';
 import { useRouter } from 'next/router';
 import { EntryHorse } from '@/types/entry-horses';
 import { mockEntryHorses } from '@/mocks/entry-horse';
-import { useTopPageTranslation } from '@/lib/i18next/translator/top';
+import { useMemo } from 'react';
 
 /** トップページで使用するネームスペース一覧 */
 const i18nextNameSpaces: NameSpace[] = ['seo', 'common', 'horse-names', 'top'];
@@ -29,12 +29,13 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ locale, def
 const TopPage: NextPage<TopPageProps> = ({ resources, entryHorses }) => {
   const { locale, defaultLocale } = useRouter();
   initializeI18n(resources, locale!, defaultLocale!);
-  const { t } = useTopPageTranslation();
+  const myDefaultSeo = useMemo(() => <MyDefaultSeo />, [locale]);
+  const topPageSeo = useMemo(() => <TopPageSeo />, [locale]);
   return (
     <>
-      <MyDefaultSeo />
-      <TopPageSeo />
-      <TopTemplate title={t('$top-page-title')} entryHorses={entryHorses} />
+      {myDefaultSeo}
+      {topPageSeo}
+      <TopTemplate entryHorses={entryHorses} />
     </>
   );
 };

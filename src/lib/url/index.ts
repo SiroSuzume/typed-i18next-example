@@ -10,5 +10,7 @@ export function buildLocalizedUrlFromLocale(
   origin: string,
   defaultLocale: string,
 ): string {
-  return locale === defaultLocale ? buildUrlFromOriginAndPath(path, origin) : `${origin}/${locale}${path}`;
+  return locale === defaultLocale
+    ? buildUrlFromOriginAndPath(path, origin)
+    : `${origin}/${locale}${path === '/' ? '' : path}`;
 }

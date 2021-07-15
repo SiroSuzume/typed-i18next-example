@@ -1,4 +1,4 @@
-import { HorseNamesTranslationKeys } from '@/locales/ja/horse-names';
+import type { HorseNamesTranslationKeys } from '@/locales/ja/horse-names';
 
 /** 出走馬情報 */
 export type EntryHorse = {

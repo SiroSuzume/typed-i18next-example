@@ -1,4 +1,3 @@
-import { defaultLocale } from '@/lib/env';
 import type { Resource, ResourceLanguage, ResourceKey } from 'i18next';
 import { NameSpace } from '../types';
 
@@ -21,7 +20,11 @@ export async function loadResourceLanguageByLocale(locale: string, nameSpaces: N
 }
 
 /** 辞書オブジェクトを読み込む */
-export async function loadI18nextResource(currentLocale: string, nameSpaces: NameSpace[]): Promise<Resource> {
+export async function loadI18nextResource(
+  currentLocale: string,
+  defaultLocale: string,
+  nameSpaces: NameSpace[],
+): Promise<Resource> {
   const locales = Array.from(new Set([currentLocale, defaultLocale]));
   const rawResources = await Promise.all<[string, ResourceLanguage]>(
     locales.map(async (locale) => [locale, await loadResourceLanguageByLocale(locale, nameSpaces)]),

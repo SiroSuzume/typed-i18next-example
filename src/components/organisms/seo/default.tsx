@@ -1,5 +1,5 @@
 import { DefaultSeo, DefaultSeoProps } from 'next-seo';
-import { defaultApiOrigin, defaultOrigin, defaultLocale } from '@/lib/env';
+import { defaultOrigin, defaultLocale } from '@/lib/env';
 import { useRouter } from 'next/router';
 import { useSEOTranslation } from '@/lib/i18next/translator/seo';
 import { buildLocalizedUrlFromLocale } from '@/lib/url';
@@ -39,8 +39,7 @@ export const MyDefaultSeo = (): JSX.Element => {
   const siteName = t('$site-name');
   const titleTemplate = `${siteName} | %s`;
   const description = t('$site-description');
-  const ogImageUrl = `${defaultOrigin}/images/{locale}/og.png`;
-
+  const ogImageUrl = `${defaultOrigin}/images/${locale}/og.png`;
   const canonical = buildLocalizedUrlFromLocale(basePath, i18n.language, defaultOrigin, defaultLocale);
   const languageAlternates = buildLanguageAlternates(basePath, i18n.languages, defaultOrigin, defaultLocale);
 
@@ -49,7 +48,7 @@ export const MyDefaultSeo = (): JSX.Element => {
       defaultTitle={siteName}
       titleTemplate={titleTemplate}
       description={description}
-      additionalLinkTags={[{ rel: 'preconnect', href: defaultApiOrigin }]}
+      // additionalLinkTags={[{ rel: 'preconnect', href: defaultApiOrigin }]}
       canonical={canonical}
       languageAlternates={languageAlternates}
       openGraph={{

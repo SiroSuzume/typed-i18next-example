@@ -5,6 +5,7 @@ import { AppLayout } from '@/components/templates/app';
 import { defaultLocale, supportedLocales } from '@/lib/env';
 import { nameSpaces } from '@/lib/i18next/types';
 import { initializeI18n } from '@/lib/i18next/initializer';
+import { withTranslation } from 'react-i18next';
 
 initializeI18n(supportedLocales, [...nameSpaces], defaultLocale);
 
@@ -15,5 +16,4 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
     </AppLayout>
   </ChakraProvider>
 );
-
-export default MyApp;
+export default withTranslation()(MyApp);

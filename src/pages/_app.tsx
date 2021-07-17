@@ -6,14 +6,22 @@ import { defaultLocale, supportedLocales } from '@/lib/env';
 import { nameSpaces } from '@/lib/i18next/types';
 import { initializeI18n } from '@/lib/i18next/initializer';
 import { withTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import { useEffect } from 'react';
 
 initializeI18n(supportedLocales, [...nameSpaces], defaultLocale);
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
-  <ChakraProvider resetCSS theme={customTheme}>
-    <AppLayout>
-      <Component {...pageProps} />
-    </AppLayout>
-  </ChakraProvider>
-);
+const MyApp = ({ Component, pageProps, router: { locale } }: AppProps): JSX.Element => {
+  useEffect(() => {
+    if (locale !== i18next.language) i18next.changeLanguage(locale);
+  }, [locale]);
+
+  return (
+    <ChakraProvider resetCSS theme={customTheme}>
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </ChakraProvider>
+  );
+};
 export default withTranslation()(MyApp);

@@ -7,7 +7,6 @@ import { importI18nextResource, ImportedResource, addImportedResources } from '@
 import { EntryHorse } from '@/types/entry-horses';
 import { mockEntryHorses } from '@/mocks/entry-horse';
 import { useRouter } from 'next/router';
-import i18next from 'i18next';
 import { useMemo } from 'react';
 
 /** トップページで使用するネームスペース一覧 */
@@ -26,9 +25,8 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ locale, def
 
 /** トップページ */
 const TopPage: NextPage<TopPageProps> = ({ resources, entryHorses }) => {
-  const { locale } = useRouter();
   addImportedResources(resources);
-  i18next.changeLanguage(locale);
+  const { locale } = useRouter();
   const myDefaultSeo = useMemo(() => <MyDefaultSeo />, [locale]);
   const topPageSeo = useMemo(() => <TopPageSeo />, [locale]);
   return (

@@ -1,8 +1,9 @@
-import { useTopPageTranslation } from '@/lib/i18next/translator/top';
 import { NextSeo } from 'next-seo';
+import { useTranslation } from 'react-i18next';
 
 /** トップページSEO設定 */
 export const TopPageSeo = (): JSX.Element => {
-  const { t } = useTopPageTranslation();
-  return <NextSeo title={t('$top-page-title')} />;
+  const { t } = useTranslation('seo');
+  const title = t`$site-names`;
+  return <NextSeo title={title} />;
 };

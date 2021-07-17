@@ -1,5 +1,5 @@
 import { DefaultSeo, DefaultSeoProps } from 'next-seo';
-import { defaultApiOrigin, defaultOrigin, defaultLocale } from '@/lib/env';
+import { defaultOrigin, defaultLocale, supportedLocales } from '@/lib/env';
 import { useRouter } from 'next/router';
 import { useSEOTranslation } from '@/lib/i18next/translator/seo';
 import { buildLocalizedUrlFromLocale } from '@/lib/url';
@@ -34,22 +34,21 @@ const facebook: DefaultSeoProps['facebook'] = process.env.NEXT_PUBLIC_FACEBOOK_A
  * @see https://github.com/garmeeh/next-seo
  */
 export const MyDefaultSeo = (): JSX.Element => {
-  const { t, i18n } = useSEOTranslation();
+  const { t } = useSEOTranslation();
   const { locale, basePath } = useRouter();
   const siteName = t('$site-name');
   const titleTemplate = `${siteName} | %s`;
   const description = t('$site-description');
-  const ogImageUrl = `${defaultOrigin}/images/{locale}/og.png`;
-
-  const canonical = buildLocalizedUrlFromLocale(basePath, i18n.language, defaultOrigin, defaultLocale);
-  const languageAlternates = buildLanguageAlternates(basePath, i18n.languages, defaultOrigin, defaultLocale);
+  const ogImageUrl = `${defaultOrigin}/images/${locale}/og.png`;
+  const canonical = buildLocalizedUrlFromLocale(basePath, locale!, defaultOrigin, defaultLocale);
+  const languageAlternates = buildLanguageAlternates(basePath, supportedLocales, defaultOrigin, defaultLocale);
 
   return (
     <DefaultSeo
       defaultTitle={siteName}
       titleTemplate={titleTemplate}
       description={description}
-      additionalLinkTags={[{ rel: 'preconnect', href: defaultApiOrigin }]}
+      // additionalLinkTags={[{ rel: 'preconnect', href: defaultApiOrigin }]}
       canonical={canonical}
       languageAlternates={languageAlternates}
       openGraph={{

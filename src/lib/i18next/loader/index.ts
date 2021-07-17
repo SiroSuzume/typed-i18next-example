@@ -1,4 +1,4 @@
-import type { Resource, ResourceLanguage, ResourceKey } from 'i18next';
+import i18next, { ResourceKey } from 'i18next';
 import { NameSpace } from '../types';
 
 /** 指定された言語の指定されたネームスペースのリソースを取得する */
@@ -6,32 +6,34 @@ export async function dynamicImportTranslationResource(lng: string, ns: NameSpac
   return (await import(`@/locales/${lng}/${ns}`)).default as ResourceKey;
 }
 
-/** 指定された言語の指定されたネームスペース一覧のリソースを取得する */
-export async function loadResourceLanguageByLocale(locale: string, nameSpaces: NameSpace[]): Promise<ResourceLanguage> {
-  const resourceLanguages = await Promise.all<[string, ResourceKey]>(
-    nameSpaces.map(async (ns) => [ns, await dynamicImportTranslationResource(locale, ns)]),
-  );
+export type ImportedResource = { locale: string; nameSpace: NameSpace; resource: ResourceKey };
 
-  return resourceLanguages.reduce((result, [namespace, resource]) => {
-    // eslint-disable-next-line no-param-reassign
-    result[namespace] = resource;
-    return result;
-  }, {} as ResourceLanguage);
+export async function importResourceByLocaleAndNameSpace(
+  locale: string,
+  nameSpace: NameSpace,
+): Promise<ImportedResource> {
+  return {
+    nameSpace,
+    locale,
+    resource: await dynamicImportTranslationResource(locale, nameSpace),
+  };
 }
 
-/** 辞書オブジェクトを読み込む */
-export async function loadI18nextResource(
-  currentLocale: string,
+/** 辞書をdynamic importする */
+export async function importI18nextResource(
+  currentLocales: string[],
   defaultLocale: string,
   nameSpaces: NameSpace[],
-): Promise<Resource> {
-  const locales = Array.from(new Set([currentLocale, defaultLocale]));
-  const rawResources = await Promise.all<[string, ResourceLanguage]>(
-    locales.map(async (locale) => [locale, await loadResourceLanguageByLocale(locale, nameSpaces)]),
+): Promise<ImportedResource[]> {
+  const requiredLocales = Array.from(new Set([...currentLocales, defaultLocale]));
+  const requiredResources = requiredLocales.flatMap((locale) => nameSpaces.map((nameSpace) => ({ nameSpace, locale })));
+  return Promise.all(
+    requiredResources.map(async ({ locale, nameSpace }) => importResourceByLocaleAndNameSpace(locale, nameSpace)),
   );
-  return rawResources.reduce((result, [lng, resource]) => {
-    // eslint-disable-next-line no-param-reassign
-    result[lng] = resource;
-    return result;
-  }, {} as Resource);
+}
+
+export function addImportedResources(resources: ImportedResource[]) {
+  resources.forEach(({ locale, nameSpace, resource }) =>
+    i18next.addResourceBundle(locale, nameSpace, resource, true, false),
+  );
 }

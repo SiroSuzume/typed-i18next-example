@@ -1,0 +1,26 @@
+name: test-frontend
+on: push
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.1'
+      - name: Install libraries
+        run: yarn
+      - name: Check ESLint
+        run: yarn lint:eslint
+      - name: Check StyleLint
+        run: yarn lint:stylelint
+      - name: Check Prettier
+        run: yarn prettier:check
+      - name: Type Check
+        run: yarn tsc --noEmit
+      - name: Test by jest
+        run: yarn test

@@ -1,9 +1,9 @@
 import { DefaultSeo, DefaultSeoProps } from 'next-seo';
 import { defaultOrigin, defaultLocale, supportedLocales } from '@/lib/env';
 import { useRouter } from 'next/router';
-import { useSEOTranslation } from '@/lib/i18next/translator/seo';
 import { buildLocalizedUrlFromLocale } from '@/lib/url';
 import { buildLanguageAlternates } from '@/lib/seo';
+import { useTranslation } from 'react-i18next';
 
 /** OG画像幅。Facebook推奨に合わせ1200 */
 const ogImageWidth = 1200;
@@ -34,7 +34,7 @@ const facebook: DefaultSeoProps['facebook'] = process.env.NEXT_PUBLIC_FACEBOOK_A
  * @see https://github.com/garmeeh/next-seo
  */
 export const MyDefaultSeo = (): JSX.Element => {
-  const { t } = useSEOTranslation();
+  const { t } = useTranslation('seo');
   const { locale, basePath } = useRouter();
   const siteName = t('$site-name');
   const titleTemplate = `${siteName} | %s`;

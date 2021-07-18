@@ -1,7 +1,7 @@
 import { EntryHorsesGrid } from '@/components/atoms/entry-horses/grid';
 import { EntryHorsesHeader } from '@/components/molecules/entry-horses/header';
-import { useCommonTranslation } from '@/lib/i18next/translator/common';
 import { EntryHorse } from '@/types/entry-horses';
+import { useTranslation } from 'react-i18next';
 import { EntryHorsesRow } from './row';
 
 export type EntryHorsesListProps = {
@@ -10,8 +10,7 @@ export type EntryHorsesListProps = {
 };
 
 export const EntryHorsesList = ({ entryHorses = [] }: EntryHorsesListProps): JSX.Element => {
-  const { t } = useCommonTranslation();
-
+  const { t } = useTranslation('common');
   return (
     <EntryHorsesGrid>
       <EntryHorsesHeader pgmLabel={t('馬番')} horseNameLabel={t('馬名')} />

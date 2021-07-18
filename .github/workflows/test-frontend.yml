@@ -13,8 +13,6 @@ jobs:
         run: yarn
       - name: Check ESLint
         run: yarn lint:eslint
-      - name: Check StyleLint
-        run: yarn lint:stylelint
       - name: Check Prettier
         run: yarn prettier:check
       - name: Type Check

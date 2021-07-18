@@ -1,4 +1,4 @@
 {
-  "$site-name": "型安全なi18nextのExample",
-  "$site-description": "Next + i18next + typescriptで型安全に翻訳リソースを管理するexample. https://github.com/SiroSuzume/typed-i18next-example"
+  "$site-name": "Next + i18next + typescript で行うSSG多言語対応example",
+  "$site-description": "Next + i18next + typescript で行うSSG多言語対応example. https://github.com/SiroSuzume/typed-i18next-example"
 }

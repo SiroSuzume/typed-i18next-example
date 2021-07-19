@@ -39,7 +39,7 @@ export const MyDefaultSeo = (): JSX.Element => {
   const siteName = t('$site-name');
   const titleTemplate = `${siteName} | %s`;
   const description = t('$site-description');
-  const ogImageUrl = `${defaultOrigin}/images/${locale}/og.png`;
+  const ogImageUrl = `${defaultOrigin}${t('$og-image-path')}`;
   const canonical = buildLocalizedUrlFromLocale(pathname, locale!, defaultOrigin, defaultLocale);
   const languageAlternates = buildLanguageAlternates(pathname, supportedLocales, defaultOrigin, defaultLocale);
 
@@ -53,6 +53,7 @@ export const MyDefaultSeo = (): JSX.Element => {
       languageAlternates={languageAlternates}
       openGraph={{
         description,
+        title: siteName,
         images: [{ url: ogImageUrl, height: ogImageHeight, width: ogImageWidth, alt: siteName }],
         type: 'website',
         site_name: siteName,

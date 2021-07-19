@@ -1,4 +1,5 @@
 {
   "$site-name": "SSG在Next + i18next + typescript中的多语言实例",
-  "$site-description": "SSG在Next + i18next + typescript中的多语言实例。https://github.com/SiroSuzume/typed-i18next-example"
+  "$site-description": "SSG在Next + i18next + typescript中的多语言实例。https://github.com/SiroSuzume/typed-i18next-example",
+  "$og-image-path": "/images/zh/og.png"
 }

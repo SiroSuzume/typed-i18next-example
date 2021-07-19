@@ -1,4 +1,5 @@
 {
   "$site-name": "SSG multilingual support example with Next + i18next + typescript",
-  "$site-description": "SSG multilingual support example with Next + i18next + typescript. https://github.com/SiroSuzume/typed-i18next-example"
+  "$site-description": "SSG multilingual support example with Next + i18next + typescript. https://github.com/SiroSuzume/typed-i18next-example",
+  "$og-image-path": "/images/en/og.png"
 }

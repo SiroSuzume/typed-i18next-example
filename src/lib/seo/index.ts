@@ -1,12 +1,8 @@
 import { buildLocalizedUrlFromLocale } from '@/lib/url';
+import type { DefaultSeoProps } from 'next-seo';
 
-/** NextSeoのlanguageAlternatesの型がexportされていないので同じものを定義 */
-export type LanguageAlternate = {
-  /** hrefLang属性 */
-  hrefLang: string;
-  /** hrefLang属性に対応したURL */
-  href: string;
-};
+/** NextSeoのlanguageAlternatesの型がexportされていないため型計算 */
+export type LanguageAlternate = Exclude<DefaultSeoProps['languageAlternates'], undefined>[number];
 
 /** 現在のパス、指定の言語、オリジンからhrefLang用オブジェクトを生成 */
 export function buildLanguageAlternate(

@@ -35,13 +35,13 @@ const facebook: DefaultSeoProps['facebook'] = process.env.NEXT_PUBLIC_FACEBOOK_A
  */
 export const MyDefaultSeo = (): JSX.Element => {
   const { t } = useTranslation('seo');
-  const { locale, basePath } = useRouter();
+  const { locale, pathname } = useRouter();
   const siteName = t('$site-name');
   const titleTemplate = `${siteName} | %s`;
   const description = t('$site-description');
   const ogImageUrl = `${defaultOrigin}/images/${locale}/og.png`;
-  const canonical = buildLocalizedUrlFromLocale(basePath, locale!, defaultOrigin, defaultLocale);
-  const languageAlternates = buildLanguageAlternates(basePath, supportedLocales, defaultOrigin, defaultLocale);
+  const canonical = buildLocalizedUrlFromLocale(pathname, locale!, defaultOrigin, defaultLocale);
+  const languageAlternates = buildLanguageAlternates(pathname, supportedLocales, defaultOrigin, defaultLocale);
 
   return (
     <DefaultSeo
